@@ -20,7 +20,11 @@ const linkElements = ["http", "twitch", "www", ".ca", ".com"]
  */
 export const checkLink = (param) => {
     if (!param.includes(" ") && linkElements.some(e => param.includes(e))) {
-        if (!param.includes("http")) {
+        if (param.includes("@")){
+            // create and return new clickable mailto link (if contact is an email)
+        return <a href={"mailto:" + param} target="_blank" rel="noreferrer">{param}</a>;
+        }            
+        else if (!param.includes("http")) {
             // add protocol type (if not available)
             param = "http://" + param
         }
